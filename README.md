@@ -35,6 +35,8 @@ var datadir = web3.admin.datadir();
 
 **Example of IPC Connection**
 
+**Note: IPC requests must be asynchronous**
+
 ```
 var web3_extended = require('web3_extended');
 
@@ -47,7 +49,11 @@ var options = {
 };
 var web3 = web3_extended.create(options);
 
-var datadir = web3.admin.datadir();
+var datadir = web3.admin.datadir(function(error,result){
+  if(!error){
+    console.log(result);
+  }
+});
 //'/Users/username/Library/Ethereum'
 ```
 
