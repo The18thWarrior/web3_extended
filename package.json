@@ -12,6 +12,10 @@
   },
   "author": "Tjaden Hess <tjade273@gmail.com>",
   "license": "MIT",
+  "contributors": [{
+    "name": "Jordan Paul",
+    "email": "jordanp323@gmail.com"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/tjade273/web3_extended"
