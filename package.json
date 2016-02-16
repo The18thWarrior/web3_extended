@@ -1,7 +1,7 @@
 {
-  "name": "web3_extended",
+  "name": "web3_ipc",
   "version": "1.0.0",
-  "description": "Extension of web3 using JSON-RPC to access additional functions.",
+  "description": "Extension of web3 using JSON-RPC and IPC to access additional functions.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
