@@ -33,6 +33,8 @@ var datadir = web3.admin.datadir();
 //'/Users/username/Library/Ethereum'
 ```
 
+**Example of IPC Connection**
+
 ```
 var web3_extended = require('web3_extended');
 
