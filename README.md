@@ -12,14 +12,33 @@ A simple extension of the web3 interface to access the Management API.
 ## Usage
 Call just as you would normal web3. There is an options object to include. The currently implemented interfaces are personal, admin, and debug. Follows the same function arguments as the Javascript Console reference: [here][0]
 
+Use the `ipc` option to use IPC instead of RPC
+
 **Note:** The security of this module has not been tested. Ideal for working inside a private network or testnet. 
 
-**Example**
+**Example of RPC Connection**
 ```
 var web3_extended = require('web3_extended');
 
 var options = {
   host: 'http://localhost:8545',
+  ipc:false,
+  personal: true, 
+  admin: true,
+  debug: false
+};
+var web3 = web3_extended.create(options);
+
+var datadir = web3.admin.datadir();
+//'/Users/username/Library/Ethereum'
+```
+
+```
+var web3_extended = require('web3_extended');
+
+var options = {
+  host: '/Users/username/Library/Ethereum/geth.ipc',
+  ipc:true,
   personal: true, 
   admin: true,
   debug: false
