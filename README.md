@@ -6,7 +6,7 @@ A simple extension of the web3 interface to access the Management API.
 ## Installation
 
 ``` bash
-  $ npm install web3_extended --save
+  $ npm install https://github.com/tjade273/web3_extended.git
 ```
 
 ## Usage
