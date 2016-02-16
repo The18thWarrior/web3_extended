@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "web3": "^0.15.1",
-    "net":">= 1.0.0"
+    "net": ">= 1.0.0"
   },
   "author": "Jordan Paul <jordanp323@gmail.com>",
   "license": "MIT",
