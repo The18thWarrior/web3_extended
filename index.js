@@ -1,11 +1,17 @@
 var Web3 = require('web3');
 var web3 = new Web3();
+var  net = require('net');
 
 exports.create = create;
 
 function create(options) {
-	web3.setProvider(new web3.providers.HttpProvider(options.host));
-
+	if(options.ipc){
+		var client = new net.Socket();
+		web3.setProvider(new web3.providers.IpcProvider(options.host,client));
+	}
+	else{
+		web3.setProvider(new web3.providers.HttpProvider(options.host));
+	}
 	if (options.personal) {
 		web3._extend({
 		  property: 'personal',
