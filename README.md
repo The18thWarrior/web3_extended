@@ -1,4 +1,4 @@
-# web3_extended
+# web3_ipc
 
 
 A simple extension of the web3 interface to access the Management API. 
@@ -6,7 +6,7 @@ A simple extension of the web3 interface to access the Management API.
 ## Installation
 
 ``` bash
-  $ npm install https://github.com/tjade273/web3_extended.git
+  $ npm install web3_ipc --save
 ```
 
 ## Usage
@@ -62,6 +62,6 @@ var datadir = web3.admin.datadir(function(error,result){
 No tests are included
 
 #### License: MIT
-#### Author: [Jordan Paul](https://github.com/The18thWarrior)
+#### Authors: [Jordan Paul](https://github.com/The18thWarrior), [TjadenHess](https://github.com/tjade273)
 
 [0]: https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#admin
