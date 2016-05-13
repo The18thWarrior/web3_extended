@@ -67,7 +67,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -87,7 +87,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -98,7 +98,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -108,7 +108,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -119,7 +119,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -129,7 +129,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -139,7 +139,7 @@ function create(options) {
 		       inputFormatter: [toIntVal]
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -149,7 +149,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -160,7 +160,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -169,7 +169,7 @@ function create(options) {
 		       params: 0
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -178,7 +178,7 @@ function create(options) {
 		       params: 0
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -189,7 +189,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -200,7 +200,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -211,7 +211,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -222,7 +222,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -233,7 +233,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 	}
 
 	if (options.debug) {
@@ -314,6 +314,27 @@ function create(options) {
 		  })]
 		});
 	}
+	if(options.testrpc){
+		web3._extend({
+			property: 'evm',
+			methods: [new web3._extend.Method({
+				name: 'snapshot',
+				call: 'evm_snapshot',
+				params: 0,
+				outputFormatter: toIntVal
+			})]
+		});
+
+		web3._extend({
+			property: 'evm',
+			methods: [new web3._extend.Method({
+				name: 'revert',
+				call: 'evm_revert',
+				params: 1,
+				inputFormatter: [toIntVal]
+			})]
+		});
+	}
 
 	function toStringVal(val) {
 		return String(val);
@@ -339,7 +360,7 @@ function create(options) {
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	function toJSONObject(val) {
@@ -352,6 +373,3 @@ function create(options) {
 
 	return web3;
 }
-
-
-	
