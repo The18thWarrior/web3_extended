@@ -335,6 +335,75 @@ function create(options) {
 			})]
 		});
 	}
+	
+	if(options.miner){
+		web3._extend({
+			property: 'miner',
+			methods: [
+				new web3._extend.Method({
+					name: "hashrate",
+					call: "miner_hashrate",
+					params: 0,
+					outputFormatter: toIntVal
+			}),
+				new web3._extend.Method({
+					name: 'makeDAG',
+					call: 'miner_makeDAG',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+			}),
+			
+				new web3._extend.Method({
+					name: 'setExtra',
+					call: 'miner_setExtra',
+					params: 1,
+					inputFormatter: [toStringVal],
+					outputFormatter: toBoolVal
+				}),
+				
+				new web3._extend.Method({
+					name: 'setGasPrice',
+					call : 'miner_setGasPrice',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+				
+				new web3._extend.Method({
+					name: 'start',
+					call: 'miner_start',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+
+				new web3._extend.Method({
+					name: 'stop',
+					call: 'miner_stop',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+				
+				new web3._extend.Method({
+					name: 'startAutoDAG',
+					call: 'miner_startAutoDAG',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+				
+				new web3._extend.Method({
+					name: 'stopAutoDAG',
+					call: 'miner_stopAutoDAG',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+			]
+		})
+	}
 
 	function toStringVal(val) {
 		return String(val);
