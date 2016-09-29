@@ -313,6 +313,15 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
+
+		web3._extend({
+		  property: 'debug',
+		  methods: [new web3._extend.Method({
+		       name: 'traceTransaction',
+		       call: 'debug_traceTransaction',
+		       params: 1
+		  })]
+		});
 	}
 	if(options.testrpc){
 		web3._extend({
@@ -335,7 +344,7 @@ function create(options) {
 			})]
 		});
 	}
-	
+
 	if(options.miner){
 		web3._extend({
 			property: 'miner',
@@ -353,7 +362,7 @@ function create(options) {
 					inputFormatter: [toIntVal],
 					outputFormatter: toBoolVal
 			}),
-			
+
 				new web3._extend.Method({
 					name: 'setExtra',
 					call: 'miner_setExtra',
@@ -361,7 +370,7 @@ function create(options) {
 					inputFormatter: [toStringVal],
 					outputFormatter: toBoolVal
 				}),
-				
+
 				new web3._extend.Method({
 					name: 'setGasPrice',
 					call : 'miner_setGasPrice',
@@ -369,7 +378,7 @@ function create(options) {
 					inputFormatter: [toIntVal],
 					outputFormatter: toBoolVal
 				}),
-				
+
 				new web3._extend.Method({
 					name: 'start',
 					call: 'miner_start',
@@ -385,7 +394,7 @@ function create(options) {
 					inputFormatter: [toIntVal],
 					outputFormatter: toBoolVal
 				}),
-				
+
 				new web3._extend.Method({
 					name: 'startAutoDAG',
 					call: 'miner_startAutoDAG',
@@ -393,7 +402,7 @@ function create(options) {
 					inputFormatter: [toIntVal],
 					outputFormatter: toBoolVal
 				}),
-				
+
 				new web3._extend.Method({
 					name: 'stopAutoDAG',
 					call: 'miner_stopAutoDAG',
@@ -434,6 +443,7 @@ function create(options) {
 
 	function toJSONObject(val) {
 		try {
+			if (typeof(val) === "object") return val;
 			return JSON.parse(val);
 		} catch (e){
 			return String(val);
