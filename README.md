@@ -14,7 +14,9 @@ A simple extension of the web3 interface to access the Management API.
 ```
 
 ## Usage
-Call just as you would normal web3. There is an options object to include. The currently implemented interfaces are personal, admin, and debug. Follows the same function arguments as the Javascript Console reference: [here][0]. Management API docs are [here][1]
+Call just as you would normal web3. There is an options object to include. The currently implemented interfaces are personal, admin, and debug. Follows the same function arguments as the Javascript Console reference: [here][0]. Management API docs are [here][1].
+
+
 Use the `ipc` option to use IPC instead of RPC
 
 **Note:** The security of this module has not been tested. Ideal for working inside a private network or testnet. 
