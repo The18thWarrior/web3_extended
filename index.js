@@ -55,6 +55,17 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
+		
+		web3._extend({
+		  property: 'personal',
+		  methods: [new web3._extend.Method({
+		       name: 'importRawKey',
+		       call: 'personal_importRawKey',
+		       params: 1,
+		       inputFormatter: [toStringVal],
+		       outputFormatter: web3._extend.utils.toAddress
+		  })]
+		});
 	}
 
 	if (options.admin) {
