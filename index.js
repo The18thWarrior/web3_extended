@@ -430,7 +430,6 @@ function create(options) {
 	}
 
 	function toBoolVal(val) {
-		console.log(val);
 		if (String(val) == 'true') {
 			return true;
 		} else {
