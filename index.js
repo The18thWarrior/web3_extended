@@ -1,11 +1,17 @@
 var Web3 = require('web3');
 var web3 = new Web3();
+var  net = require('net');
 
 exports.create = create;
 
 function create(options) {
-	web3.setProvider(new web3.providers.HttpProvider(options.host));
-
+	if(options.ipc){
+		var client = new net.Socket();
+		web3.setProvider(new web3.providers.IpcProvider(options.host,client));
+	}
+	else{
+		web3.setProvider(new web3.providers.HttpProvider(options.host));
+	}
 	if (options.personal) {
 		web3._extend({
 		  property: 'personal',
@@ -49,6 +55,17 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
+		
+		web3._extend({
+		  property: 'personal',
+		  methods: [new web3._extend.Method({
+		       name: 'importRawKey',
+		       call: 'personal_importRawKey',
+		       params: 1,
+		       inputFormatter: [toStringVal],
+		       outputFormatter: web3._extend.utils.toAddress
+		  })]
+		});
 	}
 
 	if (options.admin) {
@@ -61,7 +78,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -81,7 +98,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -92,7 +109,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -102,7 +119,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -113,7 +130,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -123,7 +140,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -133,7 +150,7 @@ function create(options) {
 		       inputFormatter: [toIntVal]
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -143,7 +160,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -154,7 +171,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -163,7 +180,7 @@ function create(options) {
 		       params: 0
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -172,7 +189,7 @@ function create(options) {
 		       params: 0
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -183,7 +200,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -194,7 +211,7 @@ function create(options) {
 		       outputFormatter: toJSONObject
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -205,7 +222,7 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -216,7 +233,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 		web3._extend({
 		  property: 'admin',
 		  methods: [new web3._extend.Method({
@@ -227,7 +244,7 @@ function create(options) {
 		       outputFormatter: toBoolVal
 		  })]
 		});
-		
+
 	}
 
 	if (options.debug) {
@@ -307,6 +324,105 @@ function create(options) {
 		       outputFormatter: toStringVal
 		  })]
 		});
+
+		web3._extend({
+		  property: 'debug',
+		  methods: [new web3._extend.Method({
+		       name: 'traceTransaction',
+		       call: 'debug_traceTransaction',
+		       params: 1
+		  })]
+		});
+	}
+	if(options.testrpc){
+		web3._extend({
+			property: 'evm',
+			methods: [new web3._extend.Method({
+				name: 'snapshot',
+				call: 'evm_snapshot',
+				params: 0,
+				outputFormatter: toIntVal
+			})]
+		});
+
+		web3._extend({
+			property: 'evm',
+			methods: [new web3._extend.Method({
+				name: 'revert',
+				call: 'evm_revert',
+				params: 1,
+				inputFormatter: [toIntVal]
+			})]
+		});
+	}
+
+	if(options.miner){
+		web3._extend({
+			property: 'miner',
+			methods: [
+				new web3._extend.Method({
+					name: "hashrate",
+					call: "miner_hashrate",
+					params: 0,
+					outputFormatter: toIntVal
+			}),
+				new web3._extend.Method({
+					name: 'makeDAG',
+					call: 'miner_makeDAG',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+			}),
+
+				new web3._extend.Method({
+					name: 'setExtra',
+					call: 'miner_setExtra',
+					params: 1,
+					inputFormatter: [toStringVal],
+					outputFormatter: toBoolVal
+				}),
+
+				new web3._extend.Method({
+					name: 'setGasPrice',
+					call : 'miner_setGasPrice',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+
+				new web3._extend.Method({
+					name: 'start',
+					call: 'miner_start',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+
+				new web3._extend.Method({
+					name: 'stop',
+					call: 'miner_stop',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+
+				new web3._extend.Method({
+					name: 'startAutoDAG',
+					call: 'miner_startAutoDAG',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+
+				new web3._extend.Method({
+					name: 'stopAutoDAG',
+					call: 'miner_stopAutoDAG',
+					params: 1,
+					inputFormatter: [toIntVal],
+					outputFormatter: toBoolVal
+				}),
+			]
+		})
 	}
 
 	function toStringVal(val) {
@@ -314,7 +430,6 @@ function create(options) {
 	}
 
 	function toBoolVal(val) {
-		console.log(val);
 		if (String(val) == 'true') {
 			return true;
 		} else {
@@ -333,11 +448,12 @@ function create(options) {
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	function toJSONObject(val) {
 		try {
+			if (typeof(val) === "object") return val;
 			return JSON.parse(val);
 		} catch (e){
 			return String(val);
@@ -346,6 +462,3 @@ function create(options) {
 
 	return web3;
 }
-
-
-	
